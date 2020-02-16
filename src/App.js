@@ -12,9 +12,9 @@ function App() {
   const [videoT, setVideoT] = useState(null)
   const [commentT, setCommentT] = useState(null)
   const [weights, setWeights] = useState({
-    videoW: null,
-    commentW: null,
-    liveSW: null,
+    videoW: 0,
+    commentW: 0,
+    liveSW: 0,
   })
 
   useEffect(() => {
@@ -22,13 +22,13 @@ function App() {
     let commentW;
     let liveSW;
     if (videoT && commentT && videoT < commentT) {
-      videoW = videoT / videoT;
-      commentW = (videoT / commentT).toFixed(2);
-      liveSW = 1.5 * videoW;
+      videoW = +videoT / videoT;
+      commentW = +(videoT / commentT).toFixed(2);
+      liveSW = 1.5 * +videoW;
     } else if (videoT && commentT &&  videoT > commentT) {
-      videoW = (videoT / commentT).toFixed(2);
-      commentW = commentT / commentT;
-      liveSW = 1.5 * videoW;
+      videoW = +(videoT / commentT).toFixed(2);
+      commentW = +commentT / commentT;
+      liveSW = 1.5 * +videoW;
     } else if (videoNum && commentNum) {
       videoW = 1;
       commentW = 1;
@@ -60,22 +60,21 @@ function App() {
       }
     
     } else {
+      console.log({liveSNum})
       if (job === 'plus') {
         setLiveSNum(liveSNum+1)
       } else if(liveSNum !== 0) {
         setLiveSNum(liveSNum-1)
       }
     }
-
-
   }
 
   const changeHandler = (videoVal, commentVal) => {
     if (videoVal) {
-      setVideoT(videoVal)
+      setVideoT(+videoVal)
     }
     if (commentVal) {
-      setCommentT(commentVal)
+      setCommentT(+commentVal)
     }
   }
   return (
@@ -101,6 +100,7 @@ function App() {
       <Form changeHandler={changeHandler}/>
       <TargetView commentT={commentT} videoT={videoT}/>
       <Weights weights={weights}/>
+      <Results commentNum={commentNum} liveSNum={liveSNum} weights={weights} LiveSNum={liveSNum} videoNum={videoNum} videoT={videoT} commentT={commentT} />
     </div>
   );
 }
