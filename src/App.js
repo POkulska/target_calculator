@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Weights from './Components/Weights/Weights'
+import { Results } from './Components/Results'
 import { TargetView } from './Components/TargetView'
 import { Form } from './Components/Form'
 import './App.css';
@@ -20,13 +21,13 @@ function App() {
     let videoW;
     let commentW;
     let liveSW;
-    if (videoNum && commentNum && videoNum < commentNum) {
-      videoW = videoNum / videoNum;
-      commentW = videoNum / commentNum;
+    if (videoT && commentT && videoT < commentT) {
+      videoW = videoT / videoT;
+      commentW = (videoT / commentT).toFixed(2);
       liveSW = 1.5 * videoW;
-    } else if (videoNum && commentNum && videoNum > commentNum) {
-      videoW = videoNum / commentNum;
-      commentW = commentNum / commentNum;
+    } else if (videoT && commentT &&  videoT > commentT) {
+      videoW = (videoT / commentT).toFixed(2);
+      commentW = commentT / commentT;
       liveSW = 1.5 * videoW;
     } else if (videoNum && commentNum) {
       videoW = 1;
