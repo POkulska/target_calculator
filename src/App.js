@@ -1,5 +1,5 @@
-import React, { useState} from 'react';
-// import Video from './Components/Video/Video'
+import React, { useState, useEffect } from 'react';
+import Weights from './Components/Weights/Weights'
 import { TargetView } from './Components/TargetView'
 import { Form } from './Components/Form'
 import './App.css';
@@ -8,10 +8,38 @@ function App() {
   const [videoNum, setVideoNum] = useState(0)
   const [commentNum, setCommentNum] = useState(0)
   const [liveSNum, setLiveSNum] = useState(0)
-
   const [videoT, setVideoT] = useState(null)
   const [commentT, setCommentT] = useState(null)
+  const [weights, setWeights] = useState({
+    videoW: null,
+    commentW: null,
+    liveSW: null,
+  })
 
+  useEffect(() => {
+    let videoW;
+    let commentW;
+    let liveSW;
+    if (videoNum && commentNum && videoNum < commentNum) {
+      videoW = videoNum / videoNum;
+      commentW = videoNum / commentNum;
+      liveSW = 1.5 * videoW;
+    } else if (videoNum && commentNum && videoNum > commentNum) {
+      videoW = videoNum / commentNum;
+      commentW = commentNum / commentNum;
+      liveSW = 1.5 * videoW;
+    } else if (videoNum && commentNum) {
+      videoW = 1;
+      commentW = 1;
+      liveSW = 1.5;
+    }
+    console.log('weights reset')
+    setWeights({
+      videoW,
+      commentW,
+      liveSW
+    })
+  }, [videoT, videoNum, commentT, commentNum, liveSNum])
 
   const clickHandler = e => {
     const parent = e.currentTarget.dataset.parent
@@ -41,13 +69,12 @@ function App() {
 
   }
 
-  const changeHandler = e => {
-    const value = e.currentTarget.value
-    const parent = e.currentTarget.dataset.parent
-    if (parent === 'video') {
-      setVideoT(value)
-    } else if (parent === 'comment') {
-      setCommentT(value)
+  const changeHandler = (videoVal, commentVal) => {
+    if (videoVal) {
+      setVideoT(videoVal)
+    }
+    if (commentVal) {
+      setCommentT(commentVal)
     }
   }
   return (
@@ -72,6 +99,7 @@ function App() {
       </div>
       <Form changeHandler={changeHandler}/>
       <TargetView commentT={commentT} videoT={videoT}/>
+      <Weights weights={weights}/>
     </div>
   );
 }
