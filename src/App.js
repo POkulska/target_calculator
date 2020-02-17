@@ -79,27 +79,32 @@ function App() {
   }
   return (
     <div className="App">
+      <div className="main"><h1>TARGET COUNTER</h1></div>
+      <div className="flexContainer">
+      <Form changeHandler={changeHandler}/>
+      <TargetView commentT={commentT} videoT={videoT}/>
+      <Weights weights={weights}/>
+      </div>
+
       <div id="video">
         <span className="button" onClick={clickHandler} data-parent="video" data-job="minus">-</span>
-        <span>Video</span>
+        <span className="text">Video</span>
         <span className="button" onClick={clickHandler} data-parent="video" data-job="plus">+</span>
         {' : '}{videoNum}
       </div>
       <div id="comment">
         <span className="button" onClick={clickHandler} data-parent="comment" data-job="minus">-</span>
-        <span>Comment</span>
+        <span className="text">Comment</span>
         <span className="button" onClick={clickHandler} data-parent="comment" data-job="plus">+</span>
         {' : '}{commentNum}
       </div>
       <div id="livestream">
         <span className="button" onClick={clickHandler} data-parent="livestream" data-job="minus">-</span>
-        <span>Live Stream</span>
+        <span className="text">Live Stream</span>
         <span className="button" onClick={clickHandler} data-parent="livestream" data-job="plus">+</span>
         {' : '}{liveSNum}
       </div>
-      <Form changeHandler={changeHandler}/>
-      <TargetView commentT={commentT} videoT={videoT}/>
-      <Weights weights={weights}/>
+
       <Results commentNum={commentNum} liveSNum={liveSNum} weights={weights} LiveSNum={liveSNum} videoNum={videoNum} videoT={videoT} commentT={commentT} />
     </div>
   );

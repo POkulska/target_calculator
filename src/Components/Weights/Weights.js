@@ -1,11 +1,11 @@
 import React from 'react'
-import './weights.style.css'
+import './weights_style.css'
 
 const Weights = ({weights}) => {
   const {videoW, commentW, liveSW} = weights
   return (
-    <div>
-      <div className="header">Weights:
+    <div className="header">
+      <div >Weights:
         <div>video weight: {videoW}</div>
         <div>        comment weight: {commentW}
         </div>

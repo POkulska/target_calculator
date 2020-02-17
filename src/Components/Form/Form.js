@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import './form_style.css'
 
 export const Form = ({changeHandler}) => {
   const form = useRef(null)
@@ -12,10 +13,11 @@ export const Form = ({changeHandler}) => {
     form.current.reset()
   }
   return (
-    <form action="" ref={form}>
+    <form action="" ref={form} className="formStyle">
       <ul>
-        <li>in videos: <input ref={video} data-parent="video" type="number" placeholder="Write value"/></li>
-        <li>in comments:<input ref={comment} data-parent="comment" type="number" placeholder="Write value"/></li>
+        <li>Target in videos: <input ref={video} data-parent="video" type="number" placeholder="Write value"/></li>
+        <li>or</li>
+        <li>Target in comments:<input ref={comment} data-parent="comment" type="number" placeholder="Write value"/></li>
       </ul>
       <button onClick={changehandle}>submit</button>
     </form>

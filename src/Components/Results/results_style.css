@@ -1,0 +1,11 @@
+.resultsDisplay {
+    background-color: rgb(253, 253, 167);
+    padding-left:1rem;
+    width:100%;
+
+}
+
+.achieved, .remaining {
+    padding:0.5rem 1rem;
+}
+
